@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.5",
+    "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.3",
     "install": "^0.13.0",
+    "tailwindcss": "^4.1.12",
     "wrangler": "^4.32.0"
   }
 }
