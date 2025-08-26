@@ -34,6 +34,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # SSG (Static Assets only):
-          command: wrangler deploy
+          command: deploy
           # If SSR and your entry is dist/_worker.js, use:
           # command: wrangler deploy dist/_worker.js
