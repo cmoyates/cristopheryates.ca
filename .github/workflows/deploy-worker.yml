@@ -1,0 +1,39 @@
+name: Deploy Worker
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Bun (official action)
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      # Install & build your Astro site with Bun
+      - name: Install deps
+        run: bun install --frozen-lockfile
+
+      - name: Build Astro
+        run: bun run build
+
+      # Deploy with Wrangler (official action)
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # SSG (Static Assets only):
+          command: wrangler deploy
+          # If SSR and your entry is dist/_worker.js, use:
+          # command: wrangler deploy dist/_worker.js
