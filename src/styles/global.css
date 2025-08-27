@@ -129,6 +129,7 @@ h6 {
   position: relative;
   width: fit-content; /* shrink to fit content */
   margin-top: 3.5em;
+  margin-bottom: 1.5em;
 }
 
 /* The link that wraps the heading text */
@@ -164,6 +165,7 @@ h6 {
 
 p {
   opacity: 0.9;
+  margin-bottom: 1.5rem;
 }
 
 /* Figure wrapper (lets us scope styles neatly) */
