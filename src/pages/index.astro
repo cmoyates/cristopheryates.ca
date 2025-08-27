@@ -1,20 +1,14 @@
 ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import "../styles/global.css";
 ---
 
-<html lang="en" class="dark">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Cristopher Yates</title>
-  </head>
-  <body class="flex min-h-screen flex-col items-center justify-center">
+<BaseLayout title="Cristopher Yates">
+  <div class="flex min-h-screen w-full flex-col items-center justify-center">
     <h1
       class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance"
     >
       Work in progress...
     </h1>
-  </body>
-</html>
+  </div>
+</BaseLayout>

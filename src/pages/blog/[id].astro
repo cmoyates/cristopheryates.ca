@@ -1,0 +1,23 @@
+---
+import BlogPostLayout from "@/layouts/BlogPostLayout.astro";
+import { getEntry } from "astro:content";
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  const { getCollection } = await import("astro:content");
+  const posts = await getCollection("blog", ({ data }) => data.draft !== true);
+  return posts.map((p) => ({ params: { id: p.id } }));
+}
+
+const { id } = Astro.params;
+const entry = await getEntry("blog", id);
+if (!entry) throw new Error("Post not found");
+const { Content } = await render(entry);
+---
+
+<BlogPostLayout title={entry.data.title}>
+  <article class="flex-col items-start justify-start">
+    <h1 class="mb-8 font-semibold">{entry.data.title}</h1>
+    <Content />
+  </article>
+</BlogPostLayout>
