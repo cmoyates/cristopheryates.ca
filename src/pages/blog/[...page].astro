@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getCollection("blog", ({ data }) => data.draft !== true);
@@ -11,26 +12,23 @@ type BlogPage = Page<CollectionEntry<"blog">>;
 const { page } = Astro.props as { page: BlogPage };
 ---
 
-<html lang="en">
-  <head><title>Blog — Page {page.currentPage}</title></head>
-  <body>
-    <h1>Blog</h1>
+<BaseLayout title="Blog">
+  <h1>Blog</h1>
 
-    <ul>
-      {
-        page.data.map((p) => (
-          <li>
-            <a href={`/blog/${p.id}/`}>{p.data.title}</a>
-            <small> - {p.data.pubDate.toDateString()}</small>
-          </li>
-        ))
-      }
-    </ul>
+  <ul>
+    {
+      page.data.map((p) => (
+        <li>
+          <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+          <small> - {p.data.pubDate.toDateString()}</small>
+        </li>
+      ))
+    }
+  </ul>
 
-    <nav aria-label="Pagination">
-      {page.url.prev && <a href={page.url.prev}>← Newer</a>}
-      <span> Page {page.currentPage} / {page.lastPage} </span>
-      {page.url.next && <a href={page.url.next}>Older →</a>}
-    </nav>
-  </body>
-</html>
+  <nav aria-label="Pagination">
+    {page.url.prev && <a href={page.url.prev}>← Newer</a>}
+    <span> Page {page.currentPage} / {page.lastPage} </span>
+    {page.url.next && <a href={page.url.next}>Older →</a>}
+  </nav>
+</BaseLayout>
