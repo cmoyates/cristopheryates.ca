@@ -25,16 +25,36 @@ Fluid interaction design
 
 Also fluid interaction design
 
+- [Rauno Freiberg](https://rauno.me/)
+
+Even more interaction design
+
 - [Chris Raroque](https://chrisraroque.com/)
 
 Inspiring devlogs
+
+- [Shu Ding](https://shud.in/)
+
+Lots of cool mini projects
+
+- [Yann-Edern Gillet](https://yannglt.com/)
+
+All sorts of software design goodness
+
+- [Henry Heffernan](https://henryheffernan.com/)
+
+Maybe the most impressive portfolio I've ever seen
 
 ## Companies
 
 - [Notion](https://www.notion.com/)
 
-Absurd attention to detail
+Crazy attention to detail
 
 - [Linear](https://linear.app/)
 
-The gold standard for modern design
+The gold standard for modern web/app design
+
+- [Family](https://benji.org/family-values)
+
+Awesome fluid design with a fantastic breakdown

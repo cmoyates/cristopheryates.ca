@@ -7,13 +7,14 @@ tags: [test]
 
 Hello world
 
-`Code snippet`
+Test text `console.log("Code snippet")` some more text after
 
 ## Section header
 
-```typescript
-console.log("code block 1");
-
-console.log("code block 2");
-console.log("code block 3");
+```typescript caption="This is just some demo code"
+const testFunction = () => {
+  console.log("This is a demo function in a code block");
+};
 ```
+
+Here's some more content

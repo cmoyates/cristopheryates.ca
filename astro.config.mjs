@@ -4,7 +4,6 @@ import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
-
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -14,7 +13,10 @@ export default defineConfig({
   vite: { plugins: [tailwindcss()] },
 
   markdown: {
+    // Disable Astro's Shiki/Prism so we don't double-highlight:
     syntaxHighlight: false,
+
+    // Rehype plugins run for Markdown/MDX only (not .astro files)
     rehypePlugins: [
       rehypeSlug,
       [
@@ -30,8 +32,10 @@ export default defineConfig({
       [
         rehypePrettyCode,
         /** @type {import('rehype-pretty-code').Options} */ ({
+          // Light/dark themes (Shiki v1 names)
           theme: { light: "github-light", dark: "github-dark" },
-          keepBackground: false,
+          keepBackground: false, // let your site/bg show through
+          defaultLang: { block: "plaintext", inline: "plaintext" },
           onVisitLine(node) {
             if (node.children.length === 0)
               node.children = [{ type: "text", value: " " }];
