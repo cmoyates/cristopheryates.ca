@@ -16,7 +16,7 @@
     - [ ] **Resources page** (optional) — image + blurb
   - [ ] Ensure consistent styling across both pages
 - Footer
-  - [ ] Finish footer with navigation between blog posts (next/previous links)
+  - [x] Finish footer with navigation between blog posts (next/previous links)
 - Blog Index
   - [ ] Redesign the blog index page
     - [ ] Replace current unstyled HTML
