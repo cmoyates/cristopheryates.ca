@@ -1,5 +1,5 @@
 // astro.config.mjs
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
@@ -11,6 +11,11 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 export default defineConfig({
   adapter: cloudflare(),
   vite: { plugins: [tailwindcss()] },
+
+  image: {
+    service: passthroughImageService(),
+    domains: ["cdn.cristopheryates.ca"],
+  },
 
   markdown: {
     // Disable Astro's Shiki/Prism so we don't double-highlight:
