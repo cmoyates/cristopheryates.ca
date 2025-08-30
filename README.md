@@ -38,3 +38,4 @@
     - [ ] Ensure `og:image` and `twitter:image` tags point to the correct generated image
   - [ ] Test full pipeline
     - [ ] Commit a new blog post → image auto-generated → deployed to Cloudflare with correct metadata
+- [x] Design the home page

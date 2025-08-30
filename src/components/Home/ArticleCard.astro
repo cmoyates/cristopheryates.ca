@@ -1,0 +1,27 @@
+---
+export type Article = {
+  name: string;
+  description: string;
+  url: string;
+  external?: boolean;
+};
+
+export interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+---
+
+<a
+  href={article.url}
+  class="card hover:bg-accent -mx-3 flex w-full flex-col rounded-md p-3 transition-colors duration-150 ease-out hover:shadow-md"
+  aria-labelledby={`t-${article.name}`}
+  target={article.external ? "_blank" : "_self"}
+  rel={article.external ? "noopener noreferrer" : undefined}
+>
+  <h3 id={`t-${article.name}`} class="text-foreground/90 m-0">
+    {article.name}
+  </h3>
+  <p class="text-muted-foreground m-0">{article.description}</p>
+</a>

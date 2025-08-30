@@ -1,14 +1,99 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import "../styles/global.css";
+import Header from "@/components/Header.astro";
+import ArticleCard, { type Article } from "@/components/Home/ArticleCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const projects: Article[] = [
+  {
+    name: "This Website",
+    description: "My personal website, built with Astro.",
+    url: "/",
+    external: false,
+  },
+  {
+    name: "Game and Bot",
+    description:
+      "A simple game and a bot to play it. Uses PCG and Vector Field pathfinding.",
+    url: "https://cmoyates.github.io/Game-and-Bot-Build/",
+    external: true,
+  },
+  {
+    name: "Genetic Evolution Demo",
+    description: "A small Unity project that demonstrates Genetic Evolution.",
+    url: "https://cmoyates.github.io/Genetic-Evolution-Demo/",
+    external: true,
+  },
+];
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+type BlogEntry = CollectionEntry<"blog">;
+
+const blogPostToCard = (entry: BlogEntry) => ({
+  name: entry.data.title,
+  description: entry.data.description ?? "",
+  url: `/blog/${entry.id}`,
+  external: false,
+});
 ---
 
 <BaseLayout title="Cristopher Yates">
-  <div class="flex min-h-screen w-full flex-col items-center justify-center">
-    <h1
-      class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance"
+  <div class="flex min-h-screen w-full flex-col items-center justify-start">
+    <div
+      class="h-full min-h-screen w-full max-w-2xl flex-col items-start justify-start px-6 py-12 sm:py-32 md:py-16"
     >
-      Work in progress...
-    </h1>
+      <Header />
+      <div class="flex flex-col items-start justify-start gap-6">
+        <h2 class="font-medium">What am I up to?</h2>
+        <div
+          class="text-muted-foreground flex flex-col items-start justify-start gap-4"
+        >
+          <p>Currently working toward launch at SpeechCatcher.</p>
+          <p>
+            I also do some hobbyist game dev, 3D printing, and electronics in my
+            spare time.
+          </p>
+        </div>
+      </div>
+      <div
+        class="mt-16 flex w-full flex-col items-start justify-start gap-6 sm:mt-32"
+      >
+        <h2 class="font-medium">Projects</h2>
+        <div
+          class="flex w-full flex-col items-start justify-start gap-7 sm:gap-4"
+        >
+          {projects.map((project) => <ArticleCard article={project} />)}
+        </div>
+      </div>
+      <div
+        class="mt-16 flex w-full flex-col items-start justify-start gap-6 sm:mt-32"
+      >
+        <h2 class="font-medium">Blog</h2>
+        <div
+          class="flex w-full flex-col items-start justify-start gap-7 sm:gap-4"
+        >
+          {posts.map((post) => <ArticleCard article={blogPostToCard(post)} />)}
+        </div>
+      </div>
+      <div
+        class="mt-16 flex w-full flex-col items-start justify-start gap-6 sm:mt-32"
+      >
+        <h2 class="font-medium">More</h2>
+        <p class="text-muted-foreground">
+          You can find more of my work on
+          <a
+            href="https://github.com/cmoyates"
+            class="hover:text-foreground underline underline-offset-1 transition-colors duration-150 ease-out"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </p>
+      </div>
+    </div>
   </div>
 </BaseLayout>
