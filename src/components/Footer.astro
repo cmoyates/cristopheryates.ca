@@ -1,3 +1,76 @@
-<div class="border-border mt-40 hidden justify-between border-t pt-6 md:flex">
-  <div class="h-10"></div>
-</div>
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const { currentEntry } = Astro.props as {
+  currentEntry: CollectionEntry<"blog">;
+};
+
+const allEntries = (
+  await getCollection("blog", ({ data }) => !data.draft)
+).slice();
+
+const dateToMs = (date: unknown) =>
+  typeof date === "string"
+    ? Date.parse(date)
+    : date instanceof Date
+      ? date.getTime()
+      : 0;
+
+const hasManualOrder = allEntries.some((e) => typeof e.data.order === "number");
+
+allEntries.sort((a, b) => {
+  if (hasManualOrder) {
+    const aOrderIndex =
+      typeof a.data.order === "number" ? a.data.order : Infinity;
+    const bOrderIndex =
+      typeof b.data.order === "number" ? b.data.order : Infinity;
+    if (aOrderIndex !== bOrderIndex) return aOrderIndex - bOrderIndex;
+  }
+  return dateToMs(a.data.pubDate) - dateToMs(b.data.pubDate);
+});
+
+const index = allEntries.findIndex((entry) => entry.id === currentEntry.id);
+
+const prevEntry = index > 0 ? allEntries[index - 1] : undefined;
+const nextEntry =
+  index >= 0 && index < allEntries.length - 1
+    ? allEntries[index + 1]
+    : undefined;
+---
+
+<nav
+  aria-label="Blog post footer navigation"
+  class="border-border mt-40 hidden justify-between border-t pt-6 md:flex"
+>
+  <div class="flex w-full flex-row items-center justify-between">
+    {
+      prevEntry ? (
+        <a
+          href={`/blog/${prevEntry.id}/`}
+          class="flex flex-col items-start justify-center text-left text-sm"
+          aria-label={`Go to previous post: ${prevEntry.data.title}`}
+        >
+          <span class="text-muted-foreground">← Prev</span>
+          <span>{prevEntry.data.title}</span>
+        </a>
+      ) : (
+        <span />
+      )
+    }
+
+    {
+      nextEntry ? (
+        <a
+          href={`/blog/${nextEntry.id}/`}
+          class="flex flex-col items-end justify-center text-right text-sm"
+          aria-label={`Go to next post: ${nextEntry.data.title}`}
+        >
+          <span class="text-muted-foreground">Next →</span>
+          <span>{nextEntry.data.title}</span>
+        </a>
+      ) : (
+        <span />
+      )
+    }
+  </div>
+</nav>
