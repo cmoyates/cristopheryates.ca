@@ -1,0 +1,20 @@
+---
+const {
+  id = "bevy-canvas",
+  width = 624 - 2,
+  height = 352 - 2,
+  className = "",
+  loaderSrc = "/bevy/loader.mjs",
+  caption = "",
+} = Astro.props;
+---
+
+<div class="my-8 flex flex-col items-center justify-center">
+  <div class={className}>
+    <canvas id={id} width={width} height={height}></canvas>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</div>
+
+<!-- Load the loader script from /public (OK to reference via src) -->
+<script type="module" src={loaderSrc}></script>

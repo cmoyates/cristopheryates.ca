@@ -1,0 +1,6 @@
+/bevy/*.wasm
+  Content-Type: application/wasm
+  Cache-Control: public, max-age=31536000, immutable
+
+/bevy/*.js
+  Cache-Control: public, max-age=31536000, immutable

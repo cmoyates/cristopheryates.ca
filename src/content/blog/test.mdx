@@ -7,6 +7,7 @@ order: 0
 ---
 
 import DraggableDot from "@/components/Test/DraggableDot.tsx";
+import BevyCanvas from "@/components/Test/BevyCanvas.astro";
 
 Hello world
 
@@ -27,3 +28,11 @@ Here's some more content
 Here's an image (the favicon from this site):
 
 ![favicon](https://cdn.cristopheryates.ca/images/cover.webp)
+
+<BevyCanvas
+  id="bevy-canvas"
+  className="border-border overflow-hidden rounded-lg border bg-black"
+  width={624 - 2}
+  height={352 - 2}
+  caption="A Bevy canvas rendered with WebAssembly"
+/>
