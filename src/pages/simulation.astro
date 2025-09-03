@@ -1,0 +1,13 @@
+---
+const { id = "bevy-canvas", loaderSrc = "/bevy/loader.mjs" } = Astro.props;
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <div class="my-8 flex h-full w-full flex-col items-center justify-center">
+    <canvas id={id}></canvas>
+  </div>
+</BaseLayout>
+
+<!-- Load the loader script from /public (OK to reference via src) -->
+<script type="module" src={loaderSrc}></script>
